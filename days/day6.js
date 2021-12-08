@@ -5,44 +5,58 @@ const data = fs.readFileSync("../input/input6.txt", "utf-8").split(',').map(e =>
 
 //--------------------------------------------------------------------------------------\\
 console.log("Part 1: ")
-let input1 = data;
-let days = 80;
-for (let i = 0; i < days; i++) {
-    let aux = [];
-    console.log(i, input1.length)
-    for (let j = 0; j < input1.length; j++) {
-        let x = input1[j];
-        if (x === 0) {
-            aux.push(6);
-            aux.push(8);
-        } else {
-            aux.push(x - 1);
-        }
-    }
-    input1 = aux.slice();
+let fish = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let input = data;
+
+for (let f of input) {
+    fish[f]++;
 }
 
-console.log(input1.length)
+let days1 = 80;
+for (let i = 0; i < days1; i++) {
+    let aux = fish[0];
+    fish[0] = fish[1];
+    fish[1] = fish[2];
+    fish[2] = fish[3];
+    fish[3] = fish[4];
+    fish[4] = fish[5];
+    fish[5] = fish[6];
+    fish[6] = fish[7] + aux;
+    fish[7] = fish[8];
+    fish[8] = aux;
+}
+
+let total1 = 0;
+for (let i = 0; i < 9; i++) total1 += fish[i];
+
+console.log(total1)
 
 console.log("--------------------------------------------------------------------------------------------------------")
 //--------------------------------------------------------------------------------------\\
 console.log("Part 2: ")
+let fish2 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let input2 = data;
-let days2 = 256;
-for (let i = 0; i < days2; i++) {
-    let aux = [];
-    console.log(i, input2.length)
-    for (let j = 0; j < input2.length; j++) {
-        let x = input2[j];
-        if (x === 0) {
-            aux.push(6);
-            aux.push(8);
-        } else {
-            aux.push(x - 1);
-        }
-    }
-    input2 = aux.slice();
+
+for (let f of input2) {
+    fish2[f]++;
 }
 
-console.log(input1.length)
+let days2 = 256;
+for (let i = 0; i < days2; i++) {
+    let aux = fish2[0];
+    fish2[0] = fish2[1];
+    fish2[1] = fish2[2];
+    fish2[2] = fish2[3];
+    fish2[3] = fish2[4];
+    fish2[4] = fish2[5];
+    fish2[5] = fish2[6];
+    fish2[6] = fish2[7] + aux;
+    fish2[7] = fish2[8];
+    fish2[8] = aux;
+}
+
+let total = 0;
+for(let i = 0; i < 9; i++) total += fish2[i];
+
+console.log(total)
 
